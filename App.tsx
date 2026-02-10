@@ -8,10 +8,26 @@ import ContactForm from './components/ContactForm';
 import { PROJECTS, SOCIALS } from './constants';
 import { SectionId, Project } from './types';
 
-const TECH_STACK = [
-  'React / Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion',
-  'Node.js', 'PostgreSQL', 'Three.js', 'Canvas API', 'Web Performance', 'Design Systems'
-];
+const TECH_STACK_ROW_1 = ['React', 'Next.js', 'Typescript', 'Tailwind CSS', 'Framer Motion'];
+const TECH_STACK_ROW_2 = ['Git', 'Node.js', 'Three.js', 'PostgreSQL', 'WebGL'];
+
+const MarqueeRow: React.FC<{ items: string[]; direction: 'left' | 'right' }> = ({ items, direction }) => {
+  return (
+    <div className="flex overflow-hidden whitespace-nowrap py-2 select-none">
+      <motion.div
+        animate={{ x: direction === 'left' ? [0, -1000] : [-1000, 0] }}
+        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        className="flex gap-4 items-center shrink-0 pr-4"
+      >
+        {[...items, ...items, ...items, ...items].map((tech, i) => (
+          <div key={i} className="px-6 py-3 rounded-2xl glass text-xs sm:text-sm font-medium text-foreground/60 border border-foreground/5 whitespace-nowrap">
+            {tech}
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
 
 const GithubIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
@@ -136,7 +152,7 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section
         id={SectionId.HERO}
-        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden pt-24 sm:pt-32 pb-40 sm:pb-48"
+        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden pt-12 pb-24 sm:pb-32"
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full flex items-center justify-center opacity-20 pointer-events-none">
           <div className="w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-gradient-to-br from-indigo-500/30 to-purple-500/30 blur-[120px] rounded-full animate-pulse" />
@@ -191,49 +207,36 @@ const App: React.FC = () => {
       </section>
 
       {/* About Section */}
-      <section id={SectionId.ABOUT} className="py-24 sm:py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="text-xs uppercase tracking-[0.4em] text-foreground/20 mb-4 block">Manifesto</span>
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-display leading-tight mb-8">
-                Quiet luxury in code is <br />
-                <span className="italic">unseen performance.</span>
-              </h2>
-              <p className="text-foreground/40 text-sm sm:text-lg font-light leading-relaxed mb-6">
-                I believe that true excellence in technology isn't found in flashy trends, but in the meticulous attention to detail that creates effortless user journeys.
-              </p>
-              <p className="text-foreground/20 text-sm sm:text-lg font-light leading-relaxed">
-                Building from the vibrant tech pulse of Nigeria, I combine engineering precision with creative storytelling to architect digital systems that resonate on a global scale.
-              </p>
-            </motion.div>
+      <section id={SectionId.ABOUT} className="py-12 sm:py-16 px-6">
+        <div className="flex flex-col gap-12 sm:gap-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="max-w-3xl"
+          >
+            <span className="text-xs uppercase tracking-[0.4em] text-foreground/20 mb-4 block">Manifesto</span>
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-display leading-tight mb-8 text-foreground">
+              Quiet luxury in code is <br />
+              <span className="italic">unseen performance.</span>
+            </h2>
+            <p className="text-foreground/40 text-sm sm:text-lg font-light leading-relaxed mb-6">
+              I believe that true excellence in technology isn't found in flashy trends, but in the meticulous attention to detail that creates effortless user journeys.
+            </p>
+            <p className="text-foreground/20 text-sm sm:text-lg font-light leading-relaxed mb-12">
+              Building from the vibrant tech pulse of Nigeria, I combine engineering precision with creative storytelling to architect digital systems that resonate on a global scale.
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="flex flex-col gap-8"
-            >
-              <span className="text-xs uppercase tracking-[0.4em] text-foreground/20 block">Core Expertise</span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {TECH_STACK.map(tech => (
-                  <div key={tech} className="border border-foreground/10 px-6 py-4 rounded-xl flex items-center justify-between group hover:border-indigo-400/50 hover:bg-white/[0.02] transition-all duration-300">
-                    <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground">{tech}</span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-foreground/20 group-hover:bg-indigo-400 group-hover:scale-150 transition-all" />
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+            <div className="flex flex-col gap-2 -mx-6 overflow-hidden">
+              <MarqueeRow items={TECH_STACK_ROW_1} direction="left" />
+              <MarqueeRow items={TECH_STACK_ROW_2} direction="right" />
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Projects Section */}
-      <section id={SectionId.PROJECTS} className="pb-32 px-6 scroll-mt-24">
+      <section id={SectionId.PROJECTS} className="pb-16 px-6 scroll-mt-24">
         <div className="max-w-6xl mx-auto mb-16 sm:mb-20">
           <span className="text-xs uppercase tracking-[0.4em] text-foreground/20 mb-4 block">Selected Works</span>
           <h2 className="text-2xl sm:text-4xl font-display text-foreground">Featured Projects</h2>
@@ -245,8 +248,8 @@ const App: React.FC = () => {
           ))}
         </div>
 
-        <div className="mt-24 sm:mt-40 text-center">
-          <MagneticButton onClick={() => setIsArchiveOpen(true)} className="text-foreground/20 hover:text-indigo-400 transition-colors text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium py-4 border-b border-foreground/10 hover:border-indigo-400">
+        <div className="mt-12 sm:mt-16 text-center">
+          <MagneticButton onClick={() => setIsArchiveOpen(true)} className="text-foreground/40 hover:text-indigo-400 transition-colors text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium py-3 border-b border-foreground/10 hover:border-indigo-400">
             Explore Archive
           </MagneticButton>
         </div>
@@ -254,54 +257,56 @@ const App: React.FC = () => {
 
       {/* Archive Modal */}
       <AnimatePresence>
-        {isArchiveOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[150] bg-background/95 backdrop-blur-2xl p-4 sm:p-8 flex items-center justify-center"
-          >
-            <div className="max-w-4xl w-full h-[85vh] sm:h-[80vh] overflow-y-auto custom-scrollbar px-4 sm:px-0">
-              <div className="flex justify-between items-center mb-12 sm:mb-16">
-                <h2 className="text-xl sm:text-3xl font-display italic">The Archive</h2>
-                <button onClick={() => setIsArchiveOpen(false)} className="text-foreground/40 hover:text-foreground transition-colors p-2 glass rounded-full">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
-                </button>
-              </div>
+        {
+          isArchiveOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[150] bg-background/95 backdrop-blur-2xl p-4 sm:p-8 flex items-center justify-center"
+            >
+              <div className="max-w-4xl w-full h-[85vh] sm:h-[80vh] overflow-y-auto custom-scrollbar px-4 sm:px-0">
+                <div className="flex justify-between items-center mb-12 sm:mb-16">
+                  <h2 className="text-xl sm:text-3xl font-display italic">The Archive</h2>
+                  <button onClick={() => setIsArchiveOpen(false)} className="text-foreground/40 hover:text-foreground transition-colors p-2 glass rounded-full">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+                  </button>
+                </div>
 
-              <div className="flex flex-col gap-6 sm:gap-8">
-                {PROJECTS.map((p, i) => (
-                  <div key={i} className="flex items-center justify-between border-b border-foreground/5 pb-6 hover:border-indigo-400 transition-colors group">
-                    <div className="flex gap-4 sm:gap-6 items-center min-w-0">
-                      <span className="text-foreground/20 font-mono text-[10px] sm:text-xs">2024</span>
-                      <span className="text-sm sm:text-lg font-medium text-foreground/60 group-hover:text-foreground transition-colors truncate">{p.title}</span>
+                <div className="flex flex-col gap-6 sm:gap-8">
+                  {PROJECTS.map((p, i) => (
+                    <div key={i} className="flex items-center justify-between border-b border-foreground/5 pb-6 hover:border-indigo-400 transition-colors group">
+                      <div className="flex gap-4 sm:gap-6 items-center min-w-0">
+                        <span className="text-foreground/20 font-mono text-[10px] sm:text-xs">2024</span>
+                        <span className="text-sm sm:text-lg font-medium text-foreground/60 group-hover:text-foreground transition-colors truncate">{p.title}</span>
+                      </div>
+                      <div className="flex items-center gap-4 sm:gap-8">
+                        <div className="text-foreground/20 text-[10px] hidden md:block uppercase tracking-widest">{p.category}</div>
+                        <a href={p.link} target="_blank" className="text-foreground/40 group-hover:text-foreground transition-colors p-2">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                        </a>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-4 sm:gap-8">
-                      <div className="text-foreground/20 text-[10px] hidden md:block uppercase tracking-widest">{p.category}</div>
-                      <a href={p.link} target="_blank" className="text-foreground/40 group-hover:text-foreground transition-colors p-2">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )
+        }
       </AnimatePresence>
 
       {/* Contact Section */}
       <section
         id={SectionId.CONTACT}
-        className="min-h-[80vh] flex flex-col justify-center items-center px-6 pt-32 pb-24"
+        className="min-h-[70vh] flex flex-col justify-center items-center px-6 pt-16 pb-16"
       >
-        <div className="max-w-4xl w-full text-center mb-24">
+        <div className="max-w-4xl w-full text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-display mb-12 italic leading-tight text-foreground">
+            <h2 className="text-2xl sm:text-4xl md:text-6xl font-display mb-8 italic leading-tight text-foreground">
               Let's create something <br />
               <span className="not-italic font-bold tracking-tighter">exceptional.</span>
             </h2>
@@ -310,17 +315,16 @@ const App: React.FC = () => {
 
         <ContactForm />
 
-        <footer className="mt-auto pt-4 pb-4 border-t border-foreground/10 w-full max-w-6xl flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-foreground/50 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-center sm:text-left font-medium">
-          <div>© 2026 Fredebel Menoh — All rights reserved</div>
-          <div className="flex items-center gap-3 text-foreground/40">
+        <footer className="mt-12 pt-6 border-t border-foreground/5 w-full max-w-6xl flex justify-between items-center text-foreground/20 text-[8px] uppercase tracking-widest font-bold">
+          <div>© 2026 Fredebel Menoh</div>
+          <div className="flex items-center gap-6">
             {SOCIALS.map((social) => (
               <a
                 key={social.id}
                 href={social.url}
-                className="hover:text-foreground transition-all duration-300 hover:scale-125 active:scale-90"
+                className="hover:text-foreground transition-all duration-300 hover:scale-110"
                 target="_blank"
                 rel="noopener noreferrer"
-                title={social.name}
               >
                 {getSocialIcon(social.id)}
               </a>
