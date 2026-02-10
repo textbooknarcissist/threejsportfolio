@@ -109,44 +109,22 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="flex items-center gap-1 sm:gap-2 px-1 h-full"
+              className="flex items-center gap-1 sm:gap-1.5 px-1.5 h-full"
             >
               <NavItem href="#hero" label="Home" active={activeSection === SectionId.HERO} icon={<HomeIcon />} />
               <NavItem href="#about" label="Info" active={activeSection === SectionId.ABOUT} icon={<InfoIcon />} />
               <NavItem href="#projects" label="Work" active={activeSection === SectionId.PROJECTS} icon={<WorkIcon />} />
-              <NavItem href="#contact" label="Hire" active={activeSection === SectionId.CONTACT} icon={<MailIcon />} />
+
+              {state !== 'CONTACT' && (
+                <NavItem href="#contact" label="Hire" active={activeSection === SectionId.CONTACT} icon={<MailIcon />} />
+              )}
 
               {state === 'CONTACT' && (
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="flex items-center gap-2 sm:gap-4 ml-2 border-l border-foreground/10 pl-2 sm:pl-4"
+                  initial={{ opacity: 0, x: 20, width: 0 }}
+                  animate={{ opacity: 1, x: 0, width: "auto" }}
+                  className="flex items-center gap-2 ml-1 sm:ml-2 border-l border-foreground/10 pl-2 sm:pl-3"
                 >
-                  <div className="hidden lg:flex items-center gap-1">
-                    {SOCIALS.map(social => (
-                      <a
-                        key={social.id}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="relative w-8 h-8 rounded-full flex items-center justify-center transition-colors text-foreground/40 hover:text-foreground group/social"
-                        onMouseEnter={() => setHoveredSocial(social.id)}
-                        onMouseLeave={() => setHoveredSocial(null)}
-                      >
-                        <div className="scale-75 transition-transform group-hover/social:scale-110 group-hover/social:jump-animation">
-                          {getSocialIcon(social.id)}
-                        </div>
-                        {hoveredSocial === social.id && (
-                          <motion.div
-                            layoutId="social-nav-hover"
-                            className="absolute inset-0 bg-foreground/5 rounded-full -z-10"
-                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                          />
-                        )}
-                      </a>
-                    ))}
-                  </div>
-
                   <motion.button
                     onClick={handleCopyEmail}
                     whileHover={{ scale: 1.02 }}
@@ -182,7 +160,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
                 </motion.div>
               )}
 
-              <div className="w-px h-6 bg-foreground/10 mx-1 sm:mx-2" />
+              <div className="w-px h-6 bg-foreground/10 mx-1 sm:mx-1.5" />
               <ThemeToggle />
             </motion.div>
           )}
@@ -195,7 +173,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
 const NavItem = ({ href, icon, label, active }: { href: string; icon: React.ReactNode; label: string; active?: boolean }) => (
   <a
     href={href}
-    className={`group flex items-center gap-3 px-4 py-2.5 rounded-full transition-all duration-300 relative ${active ? 'text-foreground' : 'text-foreground/40 hover:text-foreground'}`}
+    className={`group flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full transition-all duration-300 relative bg-foreground/[0.03] border border-transparent hover:border-foreground/5 hover:bg-foreground/5 ${active ? 'text-foreground/100' : 'text-foreground/25 hover:text-foreground/60'}`}
   >
     {active && (
       <motion.div
@@ -204,10 +182,10 @@ const NavItem = ({ href, icon, label, active }: { href: string; icon: React.Reac
         transition={{ type: "spring", stiffness: 380, damping: 30 }}
       />
     )}
-    <div className="relative z-10 scale-100 sm:scale-110">
+    <div className={`relative z-10 transition-transform duration-300 ${active ? 'scale-100 sm:scale-110 opacity-100' : 'scale-90 opacity-40 group-hover:opacity-100 group-hover:scale-100'}`}>
       {icon}
     </div>
-    <span className={`relative z-10 text-[10px] sm:text-[11px] font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[100px] opacity-100 ml-1.5' : 'max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-1.5'} inline-block`}>
+    <span className={`relative z-10 text-[9px] sm:text-[10px] uppercase tracking-wider font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[80px] opacity-100 ml-1.5' : 'max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 group-hover:ml-1.5'} hidden xs:inline-block`}>
       {label}
     </span>
     {active && (

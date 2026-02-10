@@ -160,7 +160,7 @@ const App: React.FC = () => {
             <MagneticButton href="mailto:mfredebel@gmail.com" className="w-full sm:w-auto px-10 py-4 rounded-full bg-foreground text-background font-semibold text-sm transition-transform active:scale-95">
               Let’s build together
             </MagneticButton>
-            <MagneticButton href="#" className="w-full sm:w-auto px-10 py-4 rounded-full glass text-foreground font-medium text-sm transition-transform active:scale-95">
+            <MagneticButton href="#" className="w-full sm:w-auto px-10 py-4 rounded-full bg-foreground text-background font-bold text-sm transition-all hover:opacity-90 active:scale-95 shadow-lg">
               Download CV
             </MagneticButton>
           </div>
@@ -207,7 +207,7 @@ const App: React.FC = () => {
                 I believe that true excellence in technology isn't found in flashy trends, but in the meticulous attention to detail that creates effortless user journeys.
               </p>
               <p className="text-foreground/40 text-sm sm:text-lg font-light leading-relaxed">
-                Based in Zurich, I collaborate with forward-thinking studios to architect systems that are as beautiful under the hood as they are on the screen.
+                Building from the vibrant tech pulse of Nigeria, I combine engineering precision with creative storytelling to architect digital systems that resonate on a global scale.
               </p>
             </motion.div>
 
