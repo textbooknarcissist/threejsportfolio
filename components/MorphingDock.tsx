@@ -43,7 +43,8 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('mfredebel@gmail.com');
     setEmailCopied(true);
-    setTimeout(() => setEmailCopied(false), 2000);
+    const timer = setTimeout(() => setEmailCopied(false), 2000);
+    return () => clearTimeout(timer);
   };
 
   const getDockState = (): DockState => {

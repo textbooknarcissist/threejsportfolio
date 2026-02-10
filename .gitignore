@@ -127,3 +127,8 @@ dist
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Project Artifacts & Guides
+.gemini/
+brain/
+CUSTOMIZATION_GUIDE.md

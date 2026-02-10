@@ -63,7 +63,7 @@ const ContactForm: React.FC = () => {
     };
 
     return (
-        <div className="w-full max-w-lg mx-auto glass rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden transition-all duration-500">
+        <div className="w-full max-w-lg mx-auto glass rounded-3xl p-6 sm:p-10 shadow-2xl relative overflow-hidden transition-all duration-500 border border-foreground/5">
             <AnimatePresence mode="wait">
                 {status === 'SUCCESS' ? (
                     <motion.div
@@ -104,54 +104,62 @@ const ContactForm: React.FC = () => {
                     >
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest text-foreground/40 font-bold ml-1">Name</label>
+                                <label htmlFor="name" className="text-[10px] uppercase tracking-widest text-foreground/60 font-bold ml-1">Name</label>
                                 <input
+                                    id="name"
+                                    name="name"
                                     type="text"
                                     placeholder="Fredebel Menoh"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className={`w-full bg-foreground/[0.03] border ${errors.name ? 'border-red-500/50' : 'border-foreground/10'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500/50 transition-all placeholder:text-foreground/40 text-foreground`}
+                                    className={`w-full bg-sky-500/[0.07] border ${errors.name ? 'border-red-500/50' : 'border-foreground/20'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500 focus:bg-sky-500/[0.12] transition-all placeholder:text-foreground/30 text-foreground font-medium`}
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest text-foreground/40 font-bold ml-1">Email</label>
+                                <label htmlFor="email" className="text-[10px] uppercase tracking-widest text-foreground/60 font-bold ml-1">Email</label>
                                 <input
+                                    id="email"
+                                    name="email"
                                     type="email"
                                     placeholder="mfredebel@gmail.com"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                    className={`w-full bg-foreground/[0.03] border ${errors.email ? 'border-red-500/50' : 'border-foreground/10'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500/50 transition-all placeholder:text-foreground/40 text-foreground`}
+                                    className={`w-full bg-sky-500/[0.07] border ${errors.email ? 'border-red-500/50' : 'border-foreground/20'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500 focus:bg-sky-500/[0.12] transition-all placeholder:text-foreground/30 text-foreground font-medium`}
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-foreground/40 font-bold ml-1">Select a Service</label>
+                            <label htmlFor="service" className="text-[10px] uppercase tracking-widest text-foreground/60 font-bold ml-1">Select a Service</label>
                             <div className="relative group z-20">
                                 <select
+                                    id="service"
+                                    name="service"
                                     value={formData.service}
                                     onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                                    className={`w-full appearance-none bg-foreground/[0.03] border ${errors.service ? 'border-red-500/50' : 'border-foreground/10'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500/50 transition-all cursor-pointer text-foreground`}
+                                    className={`w-full appearance-none bg-sky-500/[0.07] border ${errors.service ? 'border-red-500/50' : 'border-foreground/20'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500 focus:bg-sky-500/[0.12] transition-all cursor-pointer text-foreground font-medium`}
                                 >
                                     <option value="" disabled className="bg-background">Choose expertise...</option>
                                     {SERVICES.map(s => (
                                         <option key={s} value={s} className="bg-background text-foreground py-2">{s}</option>
                                     ))}
                                 </select>
-                                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none opacity-30 text-foreground">
+                                <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none opacity-50 text-foreground">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m6 9 6 6 6-6" /></svg>
                                 </div>
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-foreground/40 font-bold ml-1">Your Message</label>
+                            <label htmlFor="message" className="text-[10px] uppercase tracking-widest text-foreground/60 font-bold ml-1">Your Message</label>
                             <textarea
+                                id="message"
+                                name="message"
                                 rows={4}
                                 placeholder="Briefly describe your project goals..."
                                 value={formData.message}
                                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                className={`w-full bg-foreground/[0.03] border ${errors.message ? 'border-red-500/50' : 'border-foreground/10'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500/50 transition-all resize-none placeholder:text-foreground/40 text-foreground`}
+                                className={`w-full bg-sky-500/[0.07] border ${errors.message ? 'border-red-500/50' : 'border-foreground/20'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500 focus:bg-sky-500/[0.12] transition-all resize-none placeholder:text-foreground/30 text-foreground font-medium`}
                             />
                         </div>
 

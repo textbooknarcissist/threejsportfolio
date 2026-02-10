@@ -25,7 +25,7 @@ export const PROJECTS: Project[] = [
     category: 'FinTech',
     description: 'High-frequency trading interface with sub-10ms visualization latency.',
     tech: ['React', 'D3.js', 'WebSockets'],
-    image: 'https://images.unsplash.com/photo-1611974715853-26d305b986c1?q=80&w=2070&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?q=80&w=870&auto=format&fit=crop',
     link: 'https://github.com'
   }
 ];

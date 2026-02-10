@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useActiveSection } from './hooks/useActiveSection';
 import MorphingDock from './components/MorphingDock';
@@ -8,8 +8,8 @@ import ContactForm from './components/ContactForm';
 import { PROJECTS, SOCIALS } from './constants';
 import { SectionId, Project } from './types';
 
-const TECH_STACK_ROW_1 = ['React', 'Next.js', 'Typescript', 'Tailwind CSS', 'Framer Motion'];
-const TECH_STACK_ROW_2 = ['Git', 'Node.js', 'Three.js', 'PostgreSQL', 'WebGL'];
+const TECH_STACK_ROW_1 = ['React', 'Typescript', 'Tailwind CSS', 'Javascript(ES6+)', 'Github'];
+const TECH_STACK_ROW_2 = ['Git', 'Next.js', 'Responsive Design', 'Framer Motion', 'Figma'];
 
 const MarqueeRow: React.FC<{ items: string[]; direction: 'left' | 'right' }> = ({ items, direction }) => {
   return (
@@ -106,6 +106,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
             <img
               src={project.image}
               alt={project.title}
+              loading="lazy"
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
             />
           </motion.div>
@@ -138,6 +139,44 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
   );
 };
 
+const TITLES = ['Developer', 'Engineer', 'Expert'];
+
+const Typewriter: React.FC<{ words: string[] }> = ({ words }) => {
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [reverse, setReverse] = useState(false);
+
+  useEffect(() => {
+    if (subIndex === words[index].length + 1 && !reverse) {
+      setTimeout(() => setReverse(true), 1500);
+      return;
+    }
+
+    if (subIndex === 0 && reverse) {
+      setReverse(false);
+      setIndex((prev) => (prev + 1) % words.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (reverse ? -1 : 1));
+    }, reverse ? 40 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, index, reverse, words]);
+
+  return (
+    <span className="relative">
+      {words[index].substring(0, subIndex)}
+      <motion.span
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
+        className="inline-block w-[2px] h-[0.9em] bg-indigo-500 ml-1 align-middle"
+      />
+    </span>
+  );
+};
+
 const App: React.FC = () => {
   const { activeSection, activeProject } = useActiveSection();
   const [isArchiveOpen, setIsArchiveOpen] = useState(false);
@@ -152,7 +191,7 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section
         id={SectionId.HERO}
-        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden pt-12 pb-24 sm:pb-32"
+        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden pt-12 pb-12 sm:pb-32"
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full flex items-center justify-center opacity-20 pointer-events-none">
           <div className="w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-gradient-to-br from-indigo-500/30 to-purple-500/30 blur-[120px] rounded-full animate-pulse" />
@@ -164,13 +203,15 @@ const App: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center z-10 w-full max-w-3xl"
         >
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-foreground/20 mb-6 sm:mb-8 block font-medium">Fredebel Menoh | Frontend Developer</span>
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-foreground/20 mb-6 sm:mb-8 block font-medium">Menoh Fredebel</span>
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-display italic mb-6 sm:mb-8 tracking-tight leading-[1.1]">
-            Crafting Digital <br />
-            <span className="not-italic font-bold tracking-tighter">Experiences.</span>
+            Frontend<br />
+            <span className="not-italic font-bold tracking-tighter text-foreground">
+              <Typewriter words={TITLES} />
+            </span>
           </h1>
           <p className="max-w-xl mx-auto text-foreground/30 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-10 px-4">
-            Building elegant, performant web applications with a focus on exceptional user experiences and modern design.
+            I am a frontend developer with a passion for building beautiful, user-friendly web applications. I am a quick learner and a team player, and I am always looking for new challenges to grow my skills.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 sm:mb-16">
@@ -206,24 +247,23 @@ const App: React.FC = () => {
 
       </section>
 
-      {/* About Section */}
       <section id={SectionId.ABOUT} className="py-12 sm:py-16 px-6">
-        <div className="flex flex-col gap-12 sm:gap-16">
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="max-w-3xl"
+            className="w-full"
           >
             <span className="text-xs uppercase tracking-[0.4em] text-foreground/20 mb-4 block">Manifesto</span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-display leading-tight mb-8 text-foreground">
               Quiet luxury in code is <br />
               <span className="italic">unseen performance.</span>
             </h2>
-            <p className="text-foreground/40 text-sm sm:text-lg font-light leading-relaxed mb-6">
+            <p className="text-foreground/40 text-sm sm:text-lg font-light leading-relaxed mb-6 max-w-2xl mx-auto">
               I believe that true excellence in technology isn't found in flashy trends, but in the meticulous attention to detail that creates effortless user journeys.
             </p>
-            <p className="text-foreground/20 text-sm sm:text-lg font-light leading-relaxed mb-12">
+            <p className="text-foreground/20 text-sm sm:text-lg font-light leading-relaxed mb-12 max-w-2xl mx-auto">
               Building from the vibrant tech pulse of Nigeria, I combine engineering precision with creative storytelling to architect digital systems that resonate on a global scale.
             </p>
 
@@ -325,6 +365,7 @@ const App: React.FC = () => {
                 className="hover:text-foreground transition-all duration-300 hover:scale-110"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Visit my ${social.name}`}
               >
                 {getSocialIcon(social.id)}
               </a>
