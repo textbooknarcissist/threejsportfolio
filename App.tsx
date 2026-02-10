@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { useActiveSection } from './hooks/useActiveSection';
 import MorphingDock from './components/MorphingDock';
 import MagneticButton from './components/MagneticButton';
+import ContactForm from './components/ContactForm';
 import { PROJECTS, SOCIALS } from './constants';
 import { SectionId, Project } from './types';
 
@@ -105,7 +106,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
         <div className="w-full md:w-2/5 group-hover:translate-x-1 transition-transform duration-500">
           <span className="text-indigo-500 text-[10px] sm:text-xs font-semibold tracking-widest uppercase mb-3 block">0{index + 1} // {project.category}</span>
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-display mb-6 text-foreground transition-colors group-hover:text-indigo-400">{project.title}</h3>
-          <p className="text-foreground/60 mb-8 font-light leading-relaxed text-sm sm:text-base">
+          <p className="text-foreground/30 mb-8 font-light leading-relaxed text-sm sm:text-base">
             {project.description}
           </p>
           <div className="flex flex-wrap gap-2 sm:gap-3">
@@ -135,7 +136,7 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section
         id={SectionId.HERO}
-        className="min-h-screen flex flex-col justify-end items-center px-6 relative overflow-hidden pt-32 sm:pt-40 pb-32 sm:pb-40"
+        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden pt-24 sm:pt-32 pb-40 sm:pb-48"
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full flex items-center justify-center opacity-20 pointer-events-none">
           <div className="w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-gradient-to-br from-indigo-500/30 to-purple-500/30 blur-[120px] rounded-full animate-pulse" />
@@ -147,12 +148,12 @@ const App: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center z-10 w-full max-w-3xl"
         >
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-foreground/40 mb-6 sm:mb-8 block font-medium">Fredebel Menoh | Frontend Developer</span>
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.4em] text-foreground/20 mb-6 sm:mb-8 block font-medium">Fredebel Menoh | Frontend Developer</span>
           <h1 className="text-4xl sm:text-6xl md:text-8xl font-display italic mb-6 sm:mb-8 tracking-tight leading-[1.1]">
             Crafting Digital <br />
             <span className="not-italic font-bold tracking-tighter">Experiences.</span>
           </h1>
-          <p className="max-w-xl mx-auto text-foreground/50 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-10 px-4">
+          <p className="max-w-xl mx-auto text-foreground/30 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-10 px-4">
             Building elegant, performant web applications with a focus on exceptional user experiences and modern design.
           </p>
 
@@ -203,10 +204,10 @@ const App: React.FC = () => {
                 Quiet luxury in code is <br />
                 <span className="italic">unseen performance.</span>
               </h2>
-              <p className="text-foreground/60 text-sm sm:text-lg font-light leading-relaxed mb-6">
+              <p className="text-foreground/40 text-sm sm:text-lg font-light leading-relaxed mb-6">
                 I believe that true excellence in technology isn't found in flashy trends, but in the meticulous attention to detail that creates effortless user journeys.
               </p>
-              <p className="text-foreground/40 text-sm sm:text-lg font-light leading-relaxed">
+              <p className="text-foreground/20 text-sm sm:text-lg font-light leading-relaxed">
                 Building from the vibrant tech pulse of Nigeria, I combine engineering precision with creative storytelling to architect digital systems that resonate on a global scale.
               </p>
             </motion.div>
@@ -245,7 +246,7 @@ const App: React.FC = () => {
         </div>
 
         <div className="mt-24 sm:mt-40 text-center">
-          <MagneticButton onClick={() => setIsArchiveOpen(true)} className="text-foreground/40 hover:text-indigo-400 transition-colors text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium py-4 border-b border-foreground/10 hover:border-indigo-400">
+          <MagneticButton onClick={() => setIsArchiveOpen(true)} className="text-foreground/20 hover:text-indigo-400 transition-colors text-[10px] sm:text-xs uppercase tracking-[0.3em] font-medium py-4 border-b border-foreground/10 hover:border-indigo-400">
             Explore Archive
           </MagneticButton>
         </div>
@@ -292,7 +293,7 @@ const App: React.FC = () => {
       {/* Contact Section */}
       <section
         id={SectionId.CONTACT}
-        className="min-h-[60vh] flex flex-col justify-center items-center px-6 pt-24 pb-12"
+        className="min-h-[80vh] flex flex-col justify-center items-center px-6 pt-32 pb-24"
       >
         <div className="max-w-4xl w-full text-center mb-24">
           <motion.div
@@ -304,13 +305,10 @@ const App: React.FC = () => {
               Let's create something <br />
               <span className="not-italic font-bold tracking-tighter">exceptional.</span>
             </h2>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <MagneticButton href="mailto:mfredebel@gmail.com" className="w-full sm:w-auto px-12 py-6 rounded-2xl glass text-lg font-medium hover:bg-foreground hover:text-background transition-all duration-500 shadow-xl hover:shadow-indigo-500/10">
-                Get in touch
-              </MagneticButton>
-            </div>
           </motion.div>
         </div>
+
+        <ContactForm />
 
         <footer className="mt-auto pt-4 pb-4 border-t border-foreground/10 w-full max-w-6xl flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-foreground/50 text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-center sm:text-left font-medium">
           <div>© 2026 Fredebel Menoh — All rights reserved</div>
