@@ -223,7 +223,7 @@ const NavItem = ({ href, icon, label, active }: { href: string; icon: React.Reac
     <div className="relative z-10 scale-100 sm:scale-110">
       {icon}
     </div>
-    <span className={`relative z-10 text-[11px] font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[80px]' : 'max-w-0 group-hover:max-w-[80px]'} hidden xs:inline-block`}>
+    <span className={`relative z-10 text-[11px] font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[100px] opacity-100 ml-1' : 'max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-1'} hidden xs:inline-block`}>
       {label}
     </span>
     {active && (

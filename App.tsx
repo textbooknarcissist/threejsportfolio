@@ -186,14 +186,7 @@ const App: React.FC = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-12 flex flex-col items-center gap-2"
-        >
-          <span className="text-[10px] uppercase tracking-widest text-foreground/20">Explore</span>
-          <div className="w-px h-12 bg-gradient-to-b from-foreground/20 to-transparent" />
-        </motion.div>
+
       </section>
 
       {/* About Section */}
