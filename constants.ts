@@ -31,8 +31,8 @@ export const PROJECTS: Project[] = [
 ];
 
 export const SOCIALS = [
-  { id: 'github', name: 'GitHub', url: 'https://github.com' },
-  { id: 'twitter', name: 'X', url: 'https://twitter.com' },
-  { id: 'linkedin', name: 'LinkedIn', url: 'https://linkedin.com' },
-  { id: 'medium', name: 'Medium', url: 'https://medium.com' }
+  { id: 'github', name: 'GitHub', url: 'https://github.com/textbooknarcissist' },
+  { id: 'twitter', name: 'X', url: 'https://twitter.com/mfredebel' },
+  { id: 'linkedin', name: 'LinkedIn', url: 'https://www.linkedin.com/in/fredebel-m-bab914282' },
+  { id: 'medium', name: 'Medium', url: 'https://medium.com/@mfredebel' }
 ];
