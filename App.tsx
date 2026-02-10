@@ -157,10 +157,10 @@ const App: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 sm:mb-16">
-            <MagneticButton href="mailto:mfredebel@gmail.com" className="w-full sm:w-auto px-10 py-4 rounded-full bg-foreground text-background font-semibold text-sm transition-transform active:scale-95">
+            <MagneticButton href="mailto:mfredebel@gmail.com" className="w-full sm:w-auto px-10 py-4 rounded-full bg-foreground text-background font-bold text-sm transition-all hover:opacity-90 active:scale-95 shadow-lg">
               Let’s build together
             </MagneticButton>
-            <MagneticButton href="#" className="w-full sm:w-auto px-10 py-4 rounded-full bg-foreground text-background font-bold text-sm transition-all hover:opacity-90 active:scale-95 shadow-lg">
+            <MagneticButton href="#" className="w-full sm:w-auto px-10 py-4 rounded-full border border-foreground/20 text-foreground font-bold text-sm transition-all hover:bg-foreground/5 active:scale-95">
               Download CV
             </MagneticButton>
           </div>
