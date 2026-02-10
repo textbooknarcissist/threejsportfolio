@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 
@@ -39,49 +40,37 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, href, classNa
   };
 
   const content = (
-    <div
+    <motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className={`relative inline-block ${className}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      style={{ x: springX, y: springY }}
+      className={`relative inline-block ${className} transition-shadow duration-300 ${isHovered ? 'shadow-2xl shadow-white/5' : ''}`}
     >
-      <motion.div
-        style={{ x: springX, y: springY }}
-        className="w-full h-full flex items-center justify-center"
-      >
-        {children}
-      </motion.div>
+      <div className="relative z-10">{children}</div>
       {isHovered && (
         <motion.div
           layoutId="button-glow"
           className="absolute inset-0 bg-white/5 blur-xl -z-10 rounded-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1.2 }}
         />
       )}
-    </div>
+    </motion.div>
   );
 
   if (href) {
-    const isMail = href.startsWith('mailto:');
     return (
-      <a 
-        href={href} 
-        target={isMail ? undefined : '_blank'} 
-        rel={isMail ? undefined : 'noopener noreferrer'}
-        title={isMail ? "Send an email" : "Open link"}
-      >
+      <a href={href} target={href.startsWith('mailto') ? undefined : '_blank'} rel="noopener noreferrer">
         {content}
       </a>
     );
   }
 
-  return (
-    <button type="button" onClick={onClick} title="Click to perform action">
-      {content}
-    </button>
-  );
+  return <button type="button" onClick={onClick}>{content}</button>;
 };
 
 export default MagneticButton;

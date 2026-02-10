@@ -8,38 +8,47 @@ export const useActiveSection = () => {
   const [activeProject, setActiveProject] = useState<Project | undefined>();
 
   const observerCallback = useCallback((entries: IntersectionObserverEntry[]) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        
-        if (id === SectionId.HERO) {
-          setActiveSection(SectionId.HERO);
-          setActiveProject(undefined);
-        } else if (id === SectionId.ABOUT) {
-          setActiveSection(SectionId.ABOUT);
-          setActiveProject(undefined);
-        } else if (id === SectionId.CONTACT) {
-          setActiveSection(SectionId.CONTACT);
-          setActiveProject(undefined);
-        } else if (id.startsWith('project-')) {
-          setActiveSection(SectionId.PROJECTS);
-          const projectId = id.replace('project-', '');
-          const project = PROJECTS.find(p => p.id === projectId);
-          setActiveProject(project);
-        }
+    // Sort entries by intersection ratio to find the most prominent one
+    const visibleEntries = entries.filter(entry => entry.isIntersecting);
+    
+    if (visibleEntries.length > 0) {
+      // Find the entry that occupies the most space on screen
+      const topEntry = visibleEntries.reduce((prev, current) => 
+        (prev.intersectionRatio > current.intersectionRatio) ? prev : current
+      );
+
+      const id = topEntry.target.id;
+      
+      if (id === SectionId.HERO) {
+        setActiveSection(SectionId.HERO);
+        setActiveProject(undefined);
+      } else if (id === SectionId.ABOUT) {
+        setActiveSection(SectionId.ABOUT);
+        setActiveProject(undefined);
+      } else if (id === SectionId.CONTACT) {
+        setActiveSection(SectionId.CONTACT);
+        setActiveProject(undefined);
+      } else if (id.startsWith('project-')) {
+        setActiveSection(SectionId.PROJECTS);
+        const projectId = id.replace('project-', '');
+        const project = PROJECTS.find(p => p.id === projectId);
+        setActiveProject(project);
       }
-    });
+    }
   }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.3, // Slightly lower threshold for better reactivity
+      // Multiple thresholds help catch the moment a section becomes dominant
+      threshold: [0.1, 0.3, 0.5, 0.7, 0.9],
+      rootMargin: '-10% 0px -10% 0px' 
     });
 
     const sections = [
       document.getElementById(SectionId.HERO),
       document.getElementById(SectionId.ABOUT),
       document.getElementById(SectionId.CONTACT),
+      // Individual projects are tracked to update the project-specific dock state
       ...PROJECTS.map(p => document.getElementById(`project-${p.id}`))
     ];
 

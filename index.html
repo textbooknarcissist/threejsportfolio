@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --background: 5 5 5;
@@ -33,16 +36,27 @@
             transition: background-color 0.5s ease, color 0.5s ease;
             -webkit-font-smoothing: antialiased;
         }
-        
+
         .font-display {
             font-family: 'Playfair Display', serif;
         }
 
-        [data-theme='light'] .text-foreground\/20 { color: rgba(var(--foreground), 0.45); }
-        [data-theme='light'] .text-foreground\/40 { color: rgba(var(--foreground), 0.65); }
-        [data-theme='light'] .text-foreground\/50 { color: rgba(var(--foreground), 0.75); }
-        [data-theme='light'] .text-foreground\/60 { color: rgba(var(--foreground), 0.85); }
-        
+        [data-theme='light'] .text-foreground\/20 {
+            color: rgba(var(--foreground), 0.45);
+        }
+
+        [data-theme='light'] .text-foreground\/40 {
+            color: rgba(var(--foreground), 0.65);
+        }
+
+        [data-theme='light'] .text-foreground\/50 {
+            color: rgba(var(--foreground), 0.75);
+        }
+
+        [data-theme='light'] .text-foreground\/60 {
+            color: rgba(var(--foreground), 0.85);
+        }
+
         .glass {
             background: var(--glass-bg);
             -webkit-backdrop-filter: blur(16px);
@@ -54,29 +68,22 @@
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: rgb(var(--background));
         }
+
         ::-webkit-scrollbar-thumb {
             background: rgba(var(--foreground), 0.1);
             border-radius: 10px;
         }
     </style>
-<script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@19.0.0",
-    "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "framer-motion": "https://esm.sh/framer-motion@11.11.17?external=react,react-dom",
-    "react-dom/": "https://esm.sh/react-dom@19.0.0/",
-    "react/": "https://esm.sh/react@19.0.0/"
-  }
-}
-</script>
+
 </head>
+
 <body>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

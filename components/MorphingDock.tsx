@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SectionId, Project, DockState } from '../types';
@@ -37,6 +38,7 @@ const getSocialIcon = (id: string) => {
 
 const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProject }) => {
   const [emailCopied, setEmailCopied] = useState(false);
+  const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('hello@aurelius.dev');
@@ -59,25 +61,25 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
         transition={{ 
           type: "spring", 
           stiffness: 400, 
-          damping: 30,
-          layout: { duration: 0.4 } 
-        } as any}
-        className="glass rounded-full pointer-events-auto shadow-2xl overflow-hidden flex items-center h-12 sm:h-14 max-w-[95vw] sm:max-w-none"
+          damping: 32,
+          layout: { duration: 0.45 } 
+        }}
+        className="glass rounded-full pointer-events-auto shadow-2xl overflow-hidden flex items-center h-14 sm:h-16 max-w-[95vw] sm:max-w-none px-2"
       >
         <AnimatePresence mode="wait">
           {state === 'DEFAULT' && (
             <motion.div
               key="default"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="flex items-center px-2 sm:px-4 gap-0.5 sm:gap-1 h-full"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className="flex items-center gap-1.5 h-full"
             >
               <NavItem href="#hero" label="Home" active={activeSection === SectionId.HERO} icon={<HomeIcon />} />
               <NavItem href="#about" label="Info" active={activeSection === SectionId.ABOUT} icon={<InfoIcon />} />
               <NavItem href="#projects" label="Work" active={activeSection === SectionId.PROJECTS} icon={<WorkIcon />} />
               <NavItem href="#contact" label="Hire" active={activeSection === SectionId.CONTACT} icon={<MailIcon />} />
-              <div className="w-px h-6 bg-foreground/10 mx-1 sm:mx-2" />
+              <div className="w-px h-6 bg-foreground/10 mx-2" />
               <ThemeToggle />
             </motion.div>
           )}
@@ -85,36 +87,35 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
           {state === 'PROJECT' && (
             <motion.div
               key="project"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="flex items-center px-3 sm:px-6 gap-3 sm:gap-6 h-full min-w-[280px] sm:min-w-[400px] md:min-w-[480px] whitespace-nowrap"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="flex items-center px-4 gap-4 sm:gap-8 h-full min-w-[300px] sm:min-w-[480px] whitespace-nowrap"
             >
               <div className="flex flex-col justify-center min-w-0">
-                <span className="text-[7px] sm:text-[8px] uppercase tracking-[0.2em] text-foreground/40 font-semibold leading-none mb-1">Project</span>
-                <span className="text-xs sm:text-sm font-medium text-foreground leading-none truncate max-w-[100px] sm:max-w-[200px]">
+                <span className="text-[8px] uppercase tracking-[0.2em] text-foreground/40 font-bold mb-0.5">Project</span>
+                <span className="text-sm font-medium text-foreground truncate max-w-[120px] sm:max-w-[200px]">
                   {activeProject?.title}
                 </span>
               </div>
               
               <div className="hidden md:flex items-center gap-2">
                 {activeProject?.tech.slice(0, 2).map(t => (
-                  <span key={t} className="px-2 py-0.5 rounded-md bg-foreground/5 border border-foreground/10 text-[9px] text-foreground/50 font-mono">
+                  <span key={t} className="px-2 py-0.5 rounded-md bg-foreground/5 border border-foreground/10 text-[9px] text-foreground/40 font-mono">
                     {t}
                   </span>
                 ))}
               </div>
 
-              <div className="ml-auto flex items-center gap-2 sm:gap-4">
+              <div className="ml-auto flex items-center gap-4">
                 <ThemeToggle />
                 <a 
                   href={activeProject?.link} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  title="View live project"
-                  className="flex items-center gap-1.5 sm:gap-2 bg-foreground text-background px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs font-bold hover:opacity-90 transition-opacity"
+                  className="flex items-center gap-2 bg-foreground text-background px-4 py-2 rounded-full text-xs font-bold hover:opacity-90 transition-opacity"
                 >
-                  <span className="hidden xs:inline">Live</span>
+                  <span className="hidden xs:inline">Live Preview</span>
                   <ArrowUpRightIcon />
                 </a>
               </div>
@@ -124,53 +125,78 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
           {state === 'CONTACT' && (
             <motion.div
               key="contact"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              className="flex items-center px-3 sm:px-5 gap-2 sm:gap-4 h-full relative"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="flex items-center px-2 gap-4 h-full relative"
             >
-              <AnimatePresence>
-                {emailCopied && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, y: -45, scale: 1 }}
-                    exit={{ opacity: 0, y: 0, scale: 0.8 }}
-                    className="absolute top-0 right-4 px-3 py-1 bg-foreground text-background text-[10px] font-bold rounded-lg shadow-xl"
-                  >
-                    Copied!
-                    <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <div className="flex items-center gap-1 sm:gap-2">
+              <div className="flex items-center gap-1 relative">
                 {SOCIALS.map(social => (
                   <a 
                     key={social.id}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center hover:bg-foreground/10 transition-colors text-foreground/40 hover:text-foreground"
-                    title={social.name}
+                    className="relative w-10 h-10 rounded-full flex items-center justify-center transition-colors text-foreground/40 hover:text-foreground z-10"
+                    onMouseEnter={() => setHoveredSocial(social.id)}
+                    onMouseLeave={() => setHoveredSocial(null)}
                   >
                     {getSocialIcon(social.id)}
+                    {hoveredSocial === social.id && (
+                      <motion.div
+                        layoutId="social-hover"
+                        className="absolute inset-0 bg-foreground/5 rounded-full -z-10"
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      />
+                    )}
                   </a>
                 ))}
               </div>
 
               <div className="w-px h-6 bg-foreground/10" />
 
-              <button
+              <motion.button
                 onClick={handleCopyEmail}
-                title="Copy email address"
-                className="flex items-center gap-2 px-3 sm:px-5 py-2 rounded-full bg-foreground/5 border border-foreground/10 text-[10px] sm:text-[11px] font-medium hover:bg-foreground/10 transition-all active:scale-95 group"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative flex items-center gap-3 px-6 py-2.5 rounded-full bg-foreground/5 border border-foreground/10 text-xs sm:text-sm font-semibold hover:bg-foreground/10 transition-colors group"
               >
-                <span className="hidden sm:inline">hello@aurelius.dev</span>
-                <span className="sm:hidden">Email</span>
+                <span className="hidden xs:inline">hello@aurelius.dev</span>
+                <span className="xs:hidden">Email</span>
                 <AnimatePresence mode="wait" initial={false}>
-                  {emailCopied ? <CheckIcon /> : <CopyIcon />}
+                  {emailCopied ? (
+                    <motion.div
+                      key="check"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                    >
+                      <CheckIcon />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="copy"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                    >
+                      <CopyIcon />
+                    </motion.div>
+                  )}
                 </AnimatePresence>
-              </button>
+                
+                {emailCopied && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: -45 }}
+                    exit={{ opacity: 0, y: 0 }}
+                    className="absolute left-1/2 -translate-x-1/2 px-3 py-1 bg-foreground text-background text-[10px] font-bold rounded shadow-xl whitespace-nowrap"
+                  >
+                    Copied to Clipboard
+                    <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
+                  </motion.div>
+                )}
+              </motion.button>
               
               <div className="w-px h-6 bg-foreground/10 hidden sm:block" />
               <ThemeToggle />
@@ -185,44 +211,51 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
 const NavItem = ({ href, icon, label, active }: { href: string; icon: React.ReactNode; label: string; active?: boolean }) => (
   <a 
     href={href}
-    title={`Navigate to ${label}`}
-    className={`group flex items-center gap-2 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full transition-all duration-300 relative ${active ? 'bg-foreground/10 text-foreground' : 'text-foreground/40 hover:text-foreground hover:bg-foreground/5'}`}
+    className={`group flex items-center gap-3 px-4 py-2.5 rounded-full transition-all duration-300 relative ${active ? 'text-foreground' : 'text-foreground/40 hover:text-foreground'}`}
   >
-    <div className="transition-colors scale-90 sm:scale-100">
+    {active && (
+      <motion.div
+        layoutId="active-nav-pill"
+        className="absolute inset-0 bg-foreground/10 rounded-full z-0"
+        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+      />
+    )}
+    <div className="relative z-10 scale-100 sm:scale-110">
       {icon}
     </div>
-    <span className={`text-[10px] sm:text-[11px] font-medium transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[60px]' : 'max-w-0 group-hover:max-w-[60px]'} hidden xs:inline-block`}>
+    <span className={`relative z-10 text-[11px] font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[80px]' : 'max-w-0 group-hover:max-w-[80px]'} hidden xs:inline-block`}>
       {label}
     </span>
     {active && (
       <motion.div
-        layoutId="dock-active-dot"
-        className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-foreground shadow-[0_0_8px_currentColor]"
+        layoutId="active-dot"
+        className="absolute -top-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-foreground shadow-[0_0_8px_white]"
+        transition={{ type: "spring", stiffness: 380, damping: 30 }}
       />
     )}
   </a>
 );
 
 const HomeIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
 );
 const InfoIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
 );
 const WorkIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
 );
 const MailIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
 );
 const ArrowUpRightIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
 );
 const CopyIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
 );
 const CheckIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
 );
 
 export default MorphingDock;
