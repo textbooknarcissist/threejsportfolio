@@ -67,24 +67,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
         className="glass rounded-full pointer-events-auto shadow-2xl overflow-hidden flex items-center h-14 sm:h-16 max-w-[95vw] sm:max-w-none px-2"
       >
         <AnimatePresence mode="wait">
-          {state === 'DEFAULT' && (
-            <motion.div
-              key="default"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="flex items-center gap-1.5 h-full"
-            >
-              <NavItem href="#hero" label="Home" active={activeSection === SectionId.HERO} icon={<HomeIcon />} />
-              <NavItem href="#about" label="Info" active={activeSection === SectionId.ABOUT} icon={<InfoIcon />} />
-              <NavItem href="#projects" label="Work" active={activeSection === SectionId.PROJECTS} icon={<WorkIcon />} />
-              <NavItem href="#contact" label="Hire" active={activeSection === SectionId.CONTACT} icon={<MailIcon />} />
-              <div className="w-px h-6 bg-foreground/10 mx-2" />
-              <ThemeToggle />
-            </motion.div>
-          )}
-
-          {state === 'PROJECT' && (
+          {state === 'PROJECT' ? (
             <motion.div
               key="project"
               initial={{ opacity: 0, y: 20 }}
@@ -120,85 +103,86 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
                 </a>
               </div>
             </motion.div>
-          )}
-
-          {state === 'CONTACT' && (
+          ) : (
             <motion.div
-              key="contact"
+              key="nav-dock"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="flex items-center px-2 gap-4 h-full relative"
+              className="flex items-center gap-1 sm:gap-2 px-1 h-full"
             >
-              <div className="flex items-center gap-1 relative">
-                {SOCIALS.map(social => (
-                  <a
-                    key={social.id}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative w-10 h-10 rounded-full flex items-center justify-center transition-colors text-foreground/40 hover:text-foreground z-10"
-                    onMouseEnter={() => setHoveredSocial(social.id)}
-                    onMouseLeave={() => setHoveredSocial(null)}
+              <NavItem href="#hero" label="Home" active={activeSection === SectionId.HERO} icon={<HomeIcon />} />
+              <NavItem href="#about" label="Info" active={activeSection === SectionId.ABOUT} icon={<InfoIcon />} />
+              <NavItem href="#projects" label="Work" active={activeSection === SectionId.PROJECTS} icon={<WorkIcon />} />
+              <NavItem href="#contact" label="Hire" active={activeSection === SectionId.CONTACT} icon={<MailIcon />} />
+
+              {state === 'CONTACT' && (
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  className="flex items-center gap-2 sm:gap-4 ml-2 border-l border-foreground/10 pl-2 sm:pl-4"
+                >
+                  <div className="hidden lg:flex items-center gap-1">
+                    {SOCIALS.map(social => (
+                      <a
+                        key={social.id}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="relative w-8 h-8 rounded-full flex items-center justify-center transition-colors text-foreground/40 hover:text-foreground group/social"
+                        onMouseEnter={() => setHoveredSocial(social.id)}
+                        onMouseLeave={() => setHoveredSocial(null)}
+                      >
+                        <div className="scale-75 transition-transform group-hover/social:scale-110 group-hover/social:jump-animation">
+                          {getSocialIcon(social.id)}
+                        </div>
+                        {hoveredSocial === social.id && (
+                          <motion.div
+                            layoutId="social-nav-hover"
+                            className="absolute inset-0 bg-foreground/5 rounded-full -z-10"
+                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                          />
+                        )}
+                      </a>
+                    ))}
+                  </div>
+
+                  <motion.button
+                    onClick={handleCopyEmail}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="relative flex items-center gap-2 px-4 py-2 rounded-full bg-foreground text-background text-[10px] sm:text-xs font-bold transition-all shadow-lg hover:shadow-indigo-500/20 group/email"
                   >
-                    {getSocialIcon(social.id)}
-                    {hoveredSocial === social.id && (
+                    <span className="hidden sm:inline">mfredebel@gmail.com</span>
+                    <span className="sm:hidden">Email</span>
+                    <AnimatePresence mode="wait" initial={false}>
+                      {emailCopied ? (
+                        <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
+                          <CheckIcon />
+                        </motion.div>
+                      ) : (
+                        <motion.div key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
+                          <CopyIcon />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {emailCopied && (
                       <motion.div
-                        layoutId="social-hover"
-                        className="absolute inset-0 bg-foreground/5 rounded-full -z-10"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: -40 }}
+                        exit={{ opacity: 0, y: 0 }}
+                        className="absolute left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[8px] font-bold rounded shadow-xl whitespace-nowrap"
+                      >
+                        Copied!
+                        <div className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-foreground rotate-45" />
+                      </motion.div>
                     )}
-                  </a>
-                ))}
-              </div>
+                  </motion.button>
+                </motion.div>
+              )}
 
-              <div className="w-px h-6 bg-foreground/10" />
-
-              <motion.button
-                onClick={handleCopyEmail}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="relative flex items-center gap-3 px-6 py-2.5 rounded-full bg-foreground/5 border border-foreground/10 text-xs sm:text-sm font-semibold hover:bg-foreground/10 transition-colors group"
-              >
-                <span className="hidden xs:inline">mfredebel@gmail.com</span>
-                <span className="xs:hidden">Email</span>
-                <AnimatePresence mode="wait" initial={false}>
-                  {emailCopied ? (
-                    <motion.div
-                      key="check"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                    >
-                      <CheckIcon />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="copy"
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                    >
-                      <CopyIcon />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {emailCopied && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: -45 }}
-                    exit={{ opacity: 0, y: 0 }}
-                    className="absolute left-1/2 -translate-x-1/2 px-3 py-1 bg-foreground text-background text-[10px] font-bold rounded shadow-xl whitespace-nowrap"
-                  >
-                    Copied to Clipboard
-                    <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-foreground rotate-45" />
-                  </motion.div>
-                )}
-              </motion.button>
-
-              <div className="w-px h-6 bg-foreground/10 hidden sm:block" />
+              <div className="w-px h-6 bg-foreground/10 mx-1 sm:mx-2" />
               <ThemeToggle />
             </motion.div>
           )}
@@ -223,7 +207,7 @@ const NavItem = ({ href, icon, label, active }: { href: string; icon: React.Reac
     <div className="relative z-10 scale-100 sm:scale-110">
       {icon}
     </div>
-    <span className={`relative z-10 text-[11px] font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[100px] opacity-100 ml-1' : 'max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-1'} hidden xs:inline-block`}>
+    <span className={`relative z-10 text-[10px] sm:text-[11px] font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[100px] opacity-100 ml-1.5' : 'max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-1.5'} inline-block`}>
       {label}
     </span>
     {active && (
