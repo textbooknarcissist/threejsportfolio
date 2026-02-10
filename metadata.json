@@ -1,0 +1,8 @@
+{
+  "name": "Aurelius - Quiet Luxury Portfolio",
+  "description": "A high-performance portfolio featuring a context-aware morphing dock, glassmorphic aesthetics, and fluid Framer Motion transitions.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
