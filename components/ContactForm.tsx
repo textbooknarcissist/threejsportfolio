@@ -17,7 +17,8 @@ const ContactForm: React.FC = () => {
         name: '',
         email: '',
         service: '',
-        message: ''
+        message: '',
+        _honeypot: '' // Anti-spam hidden field
     });
     const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -39,21 +40,31 @@ const ContactForm: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Anti-spam check
+        if (formData._honeypot) {
+            setStatus('SUCCESS'); // Silent fail for bots
+            return;
+        }
+
         if (!validate()) return;
 
         setStatus('SENDING');
 
         try {
-            // Using Formspree as requested for direct mailbox delivery
-            const response = await fetch('https://formspree.io/f/mfredebel@gmail.com', {
+            // Using unique Formspree ID for production security
+            const response = await fetch('https://formspree.io/f/mlgwgbvq', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({
+                    ...formData,
+                    _subject: `New Inquiry from ${formData.name} - ${formData.service}`
+                })
             });
 
             if (response.ok) {
                 setStatus('SUCCESS');
-                setFormData({ name: '', email: '', service: '', message: '' });
+                setFormData({ name: '', email: '', service: '', message: '', _honeypot: '' });
             } else {
                 setStatus('ERROR');
             }
@@ -102,6 +113,17 @@ const ContactForm: React.FC = () => {
                         onSubmit={handleSubmit}
                         className="space-y-8"
                     >
+                        {/* Honeypot field - Invisible to humans */}
+                        <input
+                            type="text"
+                            name="_honeypot"
+                            style={{ display: 'none' }}
+                            tabIndex={-1}
+                            autoComplete="off"
+                            value={formData._honeypot}
+                            onChange={(e) => setFormData({ ...formData, _honeypot: e.target.value })}
+                        />
+
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                             <div className="space-y-2">
                                 <label htmlFor="name" className="text-[10px] uppercase tracking-widest text-foreground/60 font-bold ml-1">Name</label>

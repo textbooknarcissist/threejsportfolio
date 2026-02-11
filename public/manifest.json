@@ -1,0 +1,21 @@
+{
+    "name": "Menoh Fredebel | Frontend Developer",
+    "short_name": "Menoh Dev",
+    "description": "Portfolio of Menoh Fredebel, a Frontend Developer crafting high-performance digital experiences.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#6366f1",
+    "icons": [
+        {
+            "src": "/logo192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/logo512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ]
+}

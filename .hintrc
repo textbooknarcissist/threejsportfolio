@@ -9,6 +9,7 @@
         "button-name": "off",
         "link-name": "off"
       }
-    ]
+    ],
+    "apple-touch-icons": "off"
   }
 }
