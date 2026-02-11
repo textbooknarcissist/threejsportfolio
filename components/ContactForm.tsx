@@ -131,7 +131,7 @@ const ContactForm: React.FC = () => {
                                     id="name"
                                     name="name"
                                     type="text"
-                                    placeholder="Fredebel Menoh"
+                                    placeholder="Your full name"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                     className={`w-full bg-sky-500/[0.07] border ${errors.name ? 'border-red-500/50' : 'border-foreground/20'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500 focus:bg-sky-500/[0.12] transition-all placeholder:text-foreground/30 text-foreground font-medium`}
@@ -143,7 +143,7 @@ const ContactForm: React.FC = () => {
                                     id="email"
                                     name="email"
                                     type="email"
-                                    placeholder="mfredebel@gmail.com"
+                                    placeholder="your@email.com"
                                     value={formData.email}
                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                     className={`w-full bg-sky-500/[0.07] border ${errors.email ? 'border-red-500/50' : 'border-foreground/20'} rounded-2xl px-5 py-4 text-sm focus:outline-none focus:border-indigo-500 focus:bg-sky-500/[0.12] transition-all placeholder:text-foreground/30 text-foreground font-medium`}
