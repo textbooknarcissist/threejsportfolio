@@ -211,7 +211,7 @@ const App: React.FC = () => {
             </span>
           </h1>
           <p className="max-w-xl mx-auto text-foreground/30 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-10 px-4">
-            I am a frontend developer with a passion for building beautiful, user-friendly web applications. I am a quick learner and a team player, and I am always looking for new challenges to grow my skills.
+            I am a frontend developer with a passion for building scalable, user-friendly web applications. I am a quick learner and a team player, and I am always looking for new challenges to grow my skills.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 sm:mb-16">
@@ -356,7 +356,7 @@ const App: React.FC = () => {
         <ContactForm />
 
         <footer className="mt-12 pt-6 border-t border-foreground/5 w-full max-w-6xl flex justify-between items-center text-foreground/20 text-[8px] uppercase tracking-widest font-bold">
-          <div>© 2026 Fredebel Menoh</div>
+          <div>© 2026 Fredebel Menoh. All rights reserved.</div>
           <div className="flex items-center gap-6">
             {SOCIALS.map((social) => (
               <a
