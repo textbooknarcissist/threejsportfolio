@@ -56,7 +56,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
   const state = getDockState();
 
   return (
-    <div className="fixed bottom-4 sm:bottom-8 left-0 right-0 z-[100] flex justify-center pointer-events-none px-4">
+    <div className="fixed top-4 sm:top-8 left-0 right-0 z-[100] flex justify-center pointer-events-none px-4">
       <motion.div
         layout
         transition={{

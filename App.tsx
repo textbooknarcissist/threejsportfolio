@@ -191,7 +191,7 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <section
         id={SectionId.HERO}
-        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden pt-12 pb-12 sm:pb-32"
+        className="min-h-screen flex flex-col justify-center items-center px-6 relative overflow-hidden pt-24 pb-12 sm:pt-40 sm:pb-32"
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-full flex items-center justify-center opacity-20 pointer-events-none">
           <div className="w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-gradient-to-br from-indigo-500/30 to-purple-500/30 blur-[120px] rounded-full animate-pulse" />
