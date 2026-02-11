@@ -355,7 +355,7 @@ const App: React.FC = () => {
 
         <ContactForm />
 
-        <footer className="mt-12 pt-6 border-t border-foreground/5 w-full max-w-6xl flex justify-between items-center text-foreground/20 text-[8px] uppercase tracking-widest font-bold">
+        <footer className="mt-12 pt-6 border-t border-foreground/5 w-full max-w-6xl flex flex-col sm:flex-row justify-between items-center gap-6 text-foreground/20 text-[8px] uppercase tracking-widest font-bold text-center sm:text-left">
           <div>© 2026 Fredebel Menoh. All rights reserved.</div>
           <div className="flex items-center gap-6">
             {SOCIALS.map((social) => (
