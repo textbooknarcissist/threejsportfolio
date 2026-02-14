@@ -2,13 +2,13 @@ import { Project } from './types';
 
 export const PROJECTS: Project[] = [
   {
-    id: 'lumina',
-    title: 'Lumina Engine',
-    category: 'Spatial Computing',
-    description: 'An AI-driven real-time global illumination engine for architectural visualization.',
-    tech: ['C++', 'DirectX 12', 'Rust'],
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop',
-    link: 'https://github.com'
+    id: 'calabar-son',
+    title: 'Calabar Son',
+    category: 'E-commerce',
+    description: 'A premium streetwear landing page demo featuring dark mode, product gallery, cart, and checkout UI.',
+    tech: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+    image: 'https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=2070&auto=format&fit=crop',
+    link: 'https://calabarson.vercel.app'
   },
   {
     id: 'aether',
