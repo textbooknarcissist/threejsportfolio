@@ -10,6 +10,10 @@ export function useVisitorCount() {
 
     useEffect(() => {
         async function track() {
+            if (!supabase) {
+                setLoading(false);
+                return;
+            }
             try {
                 const hasVisited = localStorage.getItem(STORAGE_KEY);
 
