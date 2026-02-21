@@ -31,6 +31,7 @@ ALTER TABLE site_stats ENABLE ROW LEVEL SECURITY;
 --     Mutations only happen through the SECURITY DEFINER RPC
 --     below, which runs as the table owner and bypasses RLS.
 -- ============================================================
+DROP POLICY IF EXISTS "public_read_site_stats" ON site_stats;
 CREATE POLICY "public_read_site_stats"
   ON site_stats
   FOR SELECT
