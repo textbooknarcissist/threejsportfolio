@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useActiveSection } from './hooks/useActiveSection';
+import { useVisitorCount } from './hooks/useVisitorCount';
 import MorphingDock from './components/MorphingDock';
 import MagneticButton from './components/MagneticButton';
 import ContactForm from './components/ContactForm';
@@ -179,6 +180,7 @@ const Typewriter: React.FC<{ words: string[] }> = ({ words }) => {
 
 const App: React.FC = () => {
   const { activeSection, activeProject } = useActiveSection();
+  const { count: visitorCount, loading: visitorLoading } = useVisitorCount();
   const [isArchiveOpen, setIsArchiveOpen] = useState(false);
 
   return (
@@ -356,7 +358,15 @@ const App: React.FC = () => {
         <ContactForm />
 
         <footer className="mt-12 pt-6 border-t border-foreground/5 w-full max-w-6xl flex flex-col sm:flex-row justify-between items-center gap-6 text-foreground/20 text-[8px] uppercase tracking-widest font-bold text-center sm:text-left">
-          <div>© 2026 Fredebel Menoh. All rights reserved.</div>
+          <div className="flex flex-col gap-1.5 items-center sm:items-start">
+            <div>© 2026 Fredebel Menoh. All rights reserved.</div>
+            {!visitorLoading && visitorCount !== null && (
+              <div className="flex items-center gap-1.5">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500/60 animate-pulse" />
+                <span>{visitorCount.toLocaleString()} unique visitor{visitorCount !== 1 ? 's' : ''}</span>
+              </div>
+            )}
+          </div>
           <div className="flex items-center gap-6">
             {SOCIALS.map((social) => (
               <a

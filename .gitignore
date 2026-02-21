@@ -132,3 +132,10 @@ Thumbs.db
 .gemini/
 brain/
 CUSTOMIZATION_GUIDE.md
+
+# Local environment secrets — never commit these
+.env.local
+.env.*.local
+
+# Developer notes — local only
+DEVELOPER_NOTES.md
