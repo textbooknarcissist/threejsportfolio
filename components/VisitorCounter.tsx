@@ -14,7 +14,7 @@ const VisitorCounter: React.FC = () => {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.8 }}
                     transition={{ duration: 0.4, ease: 'easeOut', delay: 0.5 }}
-                    className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full glass border border-foreground/10 shadow-lg shadow-black/20 cursor-default select-none"
+                    className="fixed bottom-20 right-4 sm:bottom-32 sm:right-8 z-50 flex flex-col items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full glass border border-foreground/10 shadow-lg shadow-black/20 cursor-default select-none"
                     title={`${count.toLocaleString()} unique visitor${count !== 1 ? 's' : ''}`}
                 >
                     {/* Pulsing ring */}
