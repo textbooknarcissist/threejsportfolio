@@ -8,7 +8,7 @@ const SERVICES = [
     'Frontend Engineering',
     'Performance Auditing',
     'Mobile Interfaces',
-    'WebGL / 3D Development'
+    'Custom Animations'
 ];
 
 const ContactForm: React.FC = () => {
