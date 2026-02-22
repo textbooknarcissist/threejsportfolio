@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 :root {
-    --background: 5 5 5;
-    --foreground: 250 250 250;
+    --background: 5, 5, 5;
+    --foreground: 250, 250, 250;
     --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.08);
-    --accent: 99 102 241;
+    --accent: 99, 102, 241;
 }
 
 [data-theme='light'] {
-    --background: 250 250 250;
-    --foreground: 12 12 12;
+    --background: 250, 250, 250;
+    --foreground: 12, 12, 12;
     --glass-bg: rgba(0, 0, 0, 0.035);
     --glass-border: rgba(0, 0, 0, 0.12);
-    --accent: 79 70 229;
+    --accent: 79, 70, 229;
 }
 
 body {
@@ -31,8 +31,22 @@ body {
     font-family: 'Playfair Display', serif;
 }
 
+/* 
+   Tailwind Opacity Bridge 
+   Manually handling opacity for CSS variables to ensure high-contrast 
+   consistency in light mode across all browsers.
+*/
+
+[data-theme='light'] .text-foreground\/10 {
+    color: rgba(var(--foreground), 0.25);
+}
+
 [data-theme='light'] .text-foreground\/20 {
     color: rgba(var(--foreground), 0.45);
+}
+
+[data-theme='light'] .text-foreground\/30 {
+    color: rgba(var(--foreground), 0.55);
 }
 
 [data-theme='light'] .text-foreground\/40 {
@@ -45,6 +59,18 @@ body {
 
 [data-theme='light'] .text-foreground\/60 {
     color: rgba(var(--foreground), 0.85);
+}
+
+[data-theme='light'] .text-foreground\/70 {
+    color: rgba(var(--foreground), 0.90);
+}
+
+[data-theme='light'] .text-foreground\/80 {
+    color: rgba(var(--foreground), 0.95);
+}
+
+[data-theme='light'] .text-foreground\/90 {
+    color: rgba(var(--foreground), 0.98);
 }
 
 .glass {
