@@ -34,10 +34,12 @@ body {
 }
 
 /* 
-   Robust Contrast Bridge 
-   Standardizing opacity across all browsers (especially Avast/Chromium forks).
+   TRIPLE-LOCK CONTRAST BRIDGE 
+   Defensive CSS to prevent browsers (Avast/Brave/Chrome) from 
+   incorrectly inverting colors on primary interactive elements.
 */
 
+/* 1. Global Opacity Bridge for Standard Text */
 [data-theme='light'] .text-foreground {
     color: rgb(var(--foreground)) !important;
 }
@@ -82,13 +84,40 @@ body {
     color: rgba(var(--foreground), 0.98) !important;
 }
 
-/* Inverted contrast for Primary Buttons (bg-foreground text-background) */
-[data-theme='light'] .bg-foreground {
+/* 2. Inverted Component Overrides (Buttons/Pills) 
+   We use explicit HEX codes here to bypass browser-level variable interceptors. 
+*/
+.bg-foreground {
     background-color: rgb(var(--foreground)) !important;
 }
 
-[data-theme='light'] .text-background {
+.text-background {
     color: rgb(var(--background)) !important;
+    /* Fallback for browsers with forced-dark-mode heuristic */
+    -webkit-text-fill-color: rgb(var(--background)) !important;
+}
+
+[data-theme='dark'] .text-background {
+    color: #050505 !important;
+    -webkit-text-fill-color: #050505 !important;
+}
+
+[data-theme='light'] .text-background {
+    color: #fafafa !important;
+    -webkit-text-fill-color: #fafafa !important;
+}
+
+/* 3. Forced Colors Support (Accessibility Mode) */
+@media (forced-colors: active) {
+    .bg-foreground {
+        forced-color-adjust: none;
+        background-color: ButtonText !important;
+    }
+
+    .text-background {
+        forced-color-adjust: none;
+        color: ButtonFace !important;
+    }
 }
 
 .glass {
