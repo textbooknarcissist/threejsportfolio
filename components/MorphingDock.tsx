@@ -174,7 +174,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
 const NavItem = ({ href, icon, label, active }: { href: string; icon: React.ReactNode; label: string; active?: boolean }) => (
   <a
     href={href}
-    className={`group flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 md:px-5 md:py-3 lg:px-6 lg:py-4 rounded-full transition-all duration-300 relative bg-foreground/[0.03] border border-transparent hover:border-foreground/5 hover:bg-foreground/5 ${active ? 'text-foreground/100' : 'text-foreground/25 hover:text-foreground/60'}`}
+    className={`group flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 md:px-5 md:py-3 lg:px-6 lg:py-4 rounded-full transition-all duration-300 relative bg-foreground/[0.03] border ${active ? 'border-foreground/15' : 'border-transparent'} hover:border-foreground/5 hover:bg-foreground/5 ${active ? 'text-foreground/100 shadow-[0_0_20px_rgba(255,255,255,0.02)]' : 'text-foreground/25 hover:text-foreground/60'}`}
   >
     {active && (
       <motion.div
