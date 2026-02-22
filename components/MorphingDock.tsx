@@ -11,19 +11,19 @@ interface MorphingDockProps {
 }
 
 const GithubIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>
 );
 
 const XIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6"><path d="M4 4l11.733 16h4.267l-11.733 -16z" /><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" /></svg>
 );
 
 const LinkedinIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect width="4" height="12" x="2" y="9" /><circle cx="4" cy="4" r="2" /></svg>
 );
 
 const MediumIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2 12c0 3.866 3.582 7 8 7s8-3.134 8-7-3.582-7-8-7-8 3.134-8 7z" /><path d="M18 12c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6-3 2.686-3 6z" /><path d="M23 12c0 2.761.224 5 .5 5s.5-2.239.5-5-.224-5-.5-5-.5 2.239-.5 5z" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-5 h-5 md:w-6 md:h-6"><path d="M2 12c0 3.866 3.582 7 8 7s8-3.134 8-7-3.582-7-8-7-8 3.134-8 7z" /><path d="M18 12c0 3.314 1.343 6 3 6s3-2.686 3-6-1.343-6-3-6-3 2.686-3 6z" /><path d="M23 12c0 2.761.224 5 .5 5s.5-2.239.5-5-.224-5-.5-5-.5 2.239-.5 5z" /></svg>
 );
 
 const getSocialIcon = (id: string) => {
@@ -65,7 +65,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
           damping: 32,
           layout: { duration: 0.45 }
         }}
-        className="glass rounded-full pointer-events-auto shadow-2xl overflow-hidden flex items-center h-14 sm:h-16 max-w-[95vw] sm:max-w-none px-2"
+        className="glass rounded-full pointer-events-auto shadow-2xl overflow-hidden flex items-center h-14 sm:h-16 md:h-20 max-w-[95vw] sm:max-w-none px-2 md:px-4"
       >
         <AnimatePresence mode="wait">
           {state === 'PROJECT' ? (
@@ -74,30 +74,30 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="flex items-center px-4 gap-4 sm:gap-8 h-full min-w-[300px] sm:min-w-[480px] whitespace-nowrap"
+              className="flex items-center px-4 gap-4 sm:gap-8 md:gap-12 h-full min-w-[300px] sm:min-w-[480px] md:min-w-[600px] whitespace-nowrap"
             >
               <div className="flex flex-col justify-center min-w-0">
-                <span className="text-[8px] uppercase tracking-[0.2em] text-foreground/40 font-bold mb-0.5">Project</span>
-                <span className="text-sm font-medium text-foreground truncate max-w-[120px] sm:max-w-[200px]">
+                <span className="text-[8px] md:text-[10px] uppercase tracking-[0.2em] text-foreground/40 font-bold mb-0.5">Project</span>
+                <span className="text-sm md:text-lg font-medium text-foreground truncate max-w-[120px] sm:max-w-[200px] md:max-w-[300px]">
                   {activeProject?.title}
                 </span>
               </div>
 
-              <div className="hidden md:flex items-center gap-2">
-                {activeProject?.tech.slice(0, 2).map(t => (
-                  <span key={t} className="px-2 py-0.5 rounded-md bg-foreground/5 border border-foreground/10 text-[9px] text-foreground/40 font-mono">
+              <div className="hidden md:flex items-center gap-3">
+                {activeProject?.tech.slice(0, 3).map(t => (
+                  <span key={t} className="px-3 py-1 rounded-md bg-foreground/5 border border-foreground/10 text-[9px] md:text-[11px] text-foreground/40 font-mono">
                     {t}
                   </span>
                 ))}
               </div>
 
-              <div className="ml-auto flex items-center gap-4">
+              <div className="ml-auto flex items-center gap-4 md:gap-8">
                 <ThemeToggle />
                 <a
                   href={activeProject?.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 bg-foreground text-background px-4 py-2 rounded-full text-xs font-bold hover:opacity-90 transition-opacity"
+                  className="flex items-center gap-2 bg-foreground text-background px-4 py-2 md:px-8 md:py-3.5 rounded-full text-xs md:text-sm font-bold hover:opacity-90 transition-opacity"
                 >
                   <span className="hidden xs:inline">Live Preview</span>
                   <ArrowUpRightIcon />
@@ -110,7 +110,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="flex items-center gap-0.5 sm:gap-1 px-1 h-full"
+              className="flex items-center gap-0.5 sm:gap-1 md:gap-2 px-1 h-full"
             >
               <NavItem href="#hero" label="Home" active={activeSection === SectionId.HERO} icon={<HomeIcon />} />
               <NavItem href="#about" label="Info" active={activeSection === SectionId.ABOUT} icon={<InfoIcon />} />
@@ -124,13 +124,13 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
                 <motion.div
                   initial={{ opacity: 0, x: 20, width: 0 }}
                   animate={{ opacity: 1, x: 0, width: "auto" }}
-                  className="flex items-center gap-2 ml-1 sm:ml-2 border-l border-foreground/10 pl-2 sm:pl-3"
+                  className="flex items-center gap-2 ml-1 sm:ml-2 md:ml-4 border-l border-foreground/10 pl-2 sm:pl-3 md:pl-5"
                 >
                   <motion.button
                     onClick={handleCopyEmail}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative flex items-center gap-2 px-4 py-2 rounded-full bg-foreground text-background text-[10px] sm:text-xs font-bold transition-all shadow-lg hover:shadow-indigo-500/20 group/email"
+                    className="relative flex items-center gap-2 px-4 py-2 md:px-8 md:py-3.5 rounded-full bg-foreground text-background text-[10px] sm:text-xs md:text-sm font-bold transition-all shadow-lg hover:shadow-indigo-500/20 group/email"
                   >
                     <span className="hidden sm:inline">mfredebel@gmail.com</span>
                     <span className="sm:hidden">Email</span>
@@ -151,7 +151,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: -40 }}
                         exit={{ opacity: 0, y: 0 }}
-                        className="absolute left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[8px] font-bold rounded shadow-xl whitespace-nowrap"
+                        className="absolute left-1/2 -translate-x-1/2 px-2 py-1 bg-foreground text-background text-[8px] md:text-[10px] font-bold rounded shadow-xl whitespace-nowrap"
                       >
                         Copied!
                         <div className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-foreground rotate-45" />
@@ -161,7 +161,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
                 </motion.div>
               )}
 
-              <div className="w-px h-6 bg-foreground/10 mx-1 sm:mx-1.5" />
+              <div className="w-px h-6 md:h-8 bg-foreground/10 mx-1 sm:mx-1.5 md:mx-3" />
               <ThemeToggle />
             </motion.div>
           )}
@@ -174,7 +174,7 @@ const MorphingDock: React.FC<MorphingDockProps> = ({ activeSection, activeProjec
 const NavItem = ({ href, icon, label, active }: { href: string; icon: React.ReactNode; label: string; active?: boolean }) => (
   <a
     href={href}
-    className={`group flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 rounded-full transition-all duration-300 relative bg-foreground/[0.03] border border-transparent hover:border-foreground/5 hover:bg-foreground/5 ${active ? 'text-foreground/100' : 'text-foreground/25 hover:text-foreground/60'}`}
+    className={`group flex items-center gap-1.5 px-2 py-1.5 sm:px-3 sm:py-2 md:px-5 md:py-3 lg:px-6 lg:py-4 rounded-full transition-all duration-300 relative bg-foreground/[0.03] border border-transparent hover:border-foreground/5 hover:bg-foreground/5 ${active ? 'text-foreground/100' : 'text-foreground/25 hover:text-foreground/60'}`}
   >
     {active && (
       <motion.div
@@ -183,10 +183,10 @@ const NavItem = ({ href, icon, label, active }: { href: string; icon: React.Reac
         transition={{ type: "spring", stiffness: 380, damping: 30 }}
       />
     )}
-    <div className={`relative z-10 transition-transform duration-300 ${active ? 'scale-100 sm:scale-110 opacity-100' : 'scale-90 opacity-40 group-hover:opacity-100 group-hover:scale-100'}`}>
+    <div className={`relative z-10 transition-transform duration-300 ${active ? 'scale-100 sm:scale-110 md:scale-125 opacity-100' : 'scale-90 opacity-40 group-hover:opacity-100 group-hover:scale-100'}`}>
       {icon}
     </div>
-    <span className={`relative z-10 text-[9px] sm:text-[10px] uppercase tracking-wider font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[100px] opacity-100 ml-2' : 'max-w-0 opacity-0 group-hover:max-w-[100px] group-hover:opacity-100 group-hover:ml-2'} inline-block`}>
+    <span className={`relative z-10 text-[9px] sm:text-[10px] md:text-xs lg:text-sm uppercase tracking-wider font-bold transition-all duration-300 overflow-hidden whitespace-nowrap ${active ? 'max-w-[120px] opacity-100 ml-2' : 'max-w-0 opacity-0 group-hover:max-w-[120px] group-hover:opacity-100 group-hover:ml-2'} inline-block`}>
       {label}
     </span>
     {active && (
@@ -200,25 +200,25 @@ const NavItem = ({ href, icon, label, active }: { href: string; icon: React.Reac
 );
 
 const HomeIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></svg>
 );
 const InfoIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"><circle cx="12" cy="12" r="10" /><path d="M12 16v-4" /><path d="M12 8h.01" /></svg>
 );
 const WorkIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"><rect width="20" height="14" x="2" y="7" rx="2" ry="2" /><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /></svg>
 );
 const MailIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
 );
 const ArrowUpRightIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="w-3.5 h-3.5 md:w-5 md:h-5"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
 );
 const CopyIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-5 md:h-5"><rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>
 );
 const CheckIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-5 md:h-5"><polyline points="20 6 9 17 4 12" /></svg>
 );
 
 export default MorphingDock;
